@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ituze - Login / Register</title>
+  <meta name="description" content="Login or register to shop at Ituze Online Shopping." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Nunito',sans-serif;min-height:100vh;background:radial-gradient(circle at top right,#3b82f6 0,#1e3a8a 45%,#0b1022 100%);display:flex;align-items:center;justify-content:center;padding:18px}
+    .shell{width:100%;max-width:1080px;display:grid;grid-template-columns:1.05fr .95fr;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 30px 90px rgba(0,0,0,.35)}
+    .left{padding:44px 34px;background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;position:relative}
+    .left::after{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1607082349566-187342175e2f?auto=format&fit=crop&w=1200&q=80') center/cover;opacity:.2}
+    .left-content{position:relative;z-index:1}
+    .brand{font-family:'Poppins',sans-serif;font-size:32px;font-weight:800;margin-bottom:10px}
+    .brand .i{color:#ef4444}.brand .z{color:#22c55e}
+    .tag{font-size:12px;letter-spacing:2px;font-weight:700;color:#a7f3d0;margin-bottom:28px;display:block}
+    .left h2{font-family:'Poppins',sans-serif;font-size:34px;line-height:1.15;margin-bottom:12px}
+    .left p{opacity:.9;line-height:1.7;margin-bottom:22px}
+    .benefit{display:flex;gap:10px;align-items:center;margin-bottom:10px;font-size:14px;font-weight:700}
+    .benefit i{color:#93c5fd}
+
+    .right{padding:34px}
+    .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+    .back{font-size:13px;font-weight:800;color:#1d4ed8;text-decoration:none}
+    .tabs{display:flex;background:#eef2ff;padding:4px;border-radius:12px;margin-bottom:18px}
+    .tab{flex:1;padding:10px;border:none;border-radius:10px;background:none;font-weight:800;color:#64748b;cursor:pointer}
+    .tab.active{background:#fff;color:#1d4ed8;box-shadow:0 6px 16px rgba(0,0,0,.08)}
+
+    .form{display:none}.form.active{display:block}
+    .title{font-family:'Poppins',sans-serif;font-size:28px;font-weight:800;margin-bottom:6px}
+    .sub{font-size:14px;color:#64748b;margin-bottom:16px}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .group{margin-bottom:12px}
+    label{display:block;font-size:12px;font-weight:800;color:#334155;margin-bottom:6px;text-transform:uppercase}
+    .in{position:relative}
+    input{width:100%;padding:12px 14px 12px 42px;border:2px solid #e2e8f0;border-radius:10px;font-family:'Nunito',sans-serif;outline:none}
+    input:focus{border-color:#2563eb}
+    .icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#94a3b8}
+    .toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:#94a3b8;cursor:pointer}
+    .meta{display:flex;justify-content:space-between;align-items:center;margin:4px 0 14px;font-size:13px}
+    .meta a{color:#1d4ed8;font-weight:800;text-decoration:none}
+    .btn{width:100%;padding:13px;border:none;border-radius:12px;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;font-weight:800;font-size:15px;cursor:pointer}
+    .btn:disabled{opacity:.7}
+    .terms{margin-top:12px;font-size:12px;color:#64748b;line-height:1.6}
+    .terms a{color:#1d4ed8;font-weight:800;text-decoration:none}
+    .alert{display:none;padding:11px 12px;border-radius:10px;font-size:13px;font-weight:800;margin-bottom:12px}
+    .alert.error{display:block;background:#fef2f2;color:#dc2626;border:1px solid #fecaca}
+    .alert.success{display:block;background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0}
+
+    .reset-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:14px;margin-top:12px}
+    .ghost-btn{width:100%;padding:12px;border:2px solid #dbeafe;border-radius:12px;background:#fff;color:#1d4ed8;font-weight:800;cursor:pointer}
+    .reset-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+
+    @media (max-width:900px){.shell{grid-template-columns:1fr}.left{display:none}.right{padding:30px}}
+    @media (max-width:768px){.title{font-size:24px}.sub{font-size:13px}.top{margin-bottom:14px}.reset-actions{grid-template-columns:1fr}}
+    @media (max-width:480px){.row{grid-template-columns:1fr}.right{padding:20px}.tabs{margin-bottom:14px}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="left">
+      <div class="left-content">
+        <div class="brand"><span class="i">i</span>tu<span class="z">ze</span></div>
+        <span class="tag">ONLINE SHOPPING</span>
+        <h2>Modern Shopping.<br>Trusted Delivery.</h2>
+        <p>Sign in to manage your orders, checkout securely, and track delivery in real time.</p>
+        <div class="benefit"><i class="fas fa-shield"></i> Secure login and encrypted checkout</div>
+        <div class="benefit"><i class="fas fa-location-dot"></i> Location-based order delivery</div>
+        <div class="benefit"><i class="fas fa-headset"></i> Support: +250786540493</div>
+      </div>
+    </aside>
+
+    <section class="right">
+      <div class="top">
+        <a class="back" href="index.html"><i class="fas fa-arrow-left"></i> Back to store</a>
+        <small style="color:#64748b;font-weight:700">Ituze Account</small>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab('login')">Sign In</button>
+        <button class="tab" onclick="switchTab('register')">Register</button>
+      </div>
+
+      <form class="form active" id="loginForm" onsubmit="doLogin(event)">
+        <h1 class="title">Welcome back</h1>
+        <p class="sub">Login to continue your shopping.</p>
+        <div id="loginAlert" class="alert"></div>
+
+        <div class="group">
+          <label>Email</label>
+          <div class="in"><i class="fas fa-envelope icon"></i><input id="loginEmail" type="email" required placeholder="you@email.com" /></div>
+        </div>
+        <div class="group">
+          <label>Password</label>
+          <div class="in"><i class="fas fa-lock icon"></i><input id="loginPass" type="password" required placeholder="Your password" /><button type="button" class="toggle" onclick="togglePass('loginPass',this)"><i class="fas fa-eye"></i></button></div>
+        </div>
+        <div class="meta">
+          <label><input type="checkbox" id="rememberMe" style="margin-right:6px">Remember me</label>
+          <a href="#" onclick="switchTab('reset');return false;">Forgot password?</a>
+        </div>
+        <button class="btn" id="loginBtn" type="submit"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+      </form>
+
+      <form class="form" id="resetForm" onsubmit="doResetPassword(event)">
+        <h1 class="title">Reset your password</h1>
+        <p class="sub">Enter your account email. A secure reset link will be sent instantly.</p>
+        <div id="resetAlert" class="alert"></div>
+
+        <div class="reset-card">
+          <div class="group" style="margin-bottom:0">
+            <label>Account Email</label>
+            <div class="in"><i class="fas fa-envelope icon"></i><input id="resetEmail" type="email" required placeholder="you@email.com" /></div>
+          </div>
+        </div>
+
+        <div class="reset-actions">
+          <button class="btn" id="resetBtn" type="submit"><i class="fas fa-paper-plane"></i> Send Reset Link</button>
+          <button class="ghost-btn" type="button" onclick="switchTab('login')"><i class="fas fa-arrow-left"></i> Back to Login</button>
+        </div>
+      </form>
+
+      <form class="form" id="registerForm" onsubmit="doRegister(event)">
+        <h1 class="title">Create account</h1>
+        <p class="sub">Register and start ordering today.</p>
+        <div id="registerAlert" class="alert"></div>
+
+        <div class="row">
+          <div class="group"><label>First Name</label><div class="in"><i class="fas fa-user icon"></i><input id="regFirstName" required /></div></div>
+          <div class="group"><label>Last Name</label><div class="in"><i class="fas fa-user icon"></i><input id="regLastName" /></div></div>
+        </div>
+        <div class="group"><label>Email</label><div class="in"><i class="fas fa-envelope icon"></i><input id="regEmail" type="email" required /></div></div>
+        <div class="group"><label>Phone Number</label><div class="in"><i class="fas fa-phone icon"></i><input id="regPhone" placeholder="+2507..." /></div></div>
+        <div class="group"><label>Password</label><div class="in"><i class="fas fa-lock icon"></i><input id="regPass" type="password" minlength="6" required /><button type="button" class="toggle" onclick="togglePass('regPass',this)"><i class="fas fa-eye"></i></button></div></div>
+        <div class="group"><label>Confirm Password</label><div class="in"><i class="fas fa-lock icon"></i><input id="regConfirm" type="password" required /></div></div>
+        <button class="btn" id="registerBtn" type="submit"><i class="fas fa-user-plus"></i> Create Account</button>
+        <p class="terms">By continuing you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>. Contact: <a href="mailto:ndayisabapatrick75@gmail.com">ndayisabapatrick75@gmail.com</a></p>
+      </form>
+    </section>
+  </div>
+
+<script src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+<script>
+Parse.initialize("TpiBmthg1BvbcbU9GjGUX74hHCz5Muoh5buAglTm", "mwGP82zcPZsUDUdbVN7T6H70RFydSTGxDHQIejdY");
+Parse.serverURL = "https://parseapi.back4app.com/";
+
+async function resolvePostLoginRoute(user) {
+  if (!user) return 'auth.html';
+  try { await Parse.Cloud.run('adminGrantAccess'); } catch (_) {}
+  try {
+    await Parse.Cloud.run('adminGetStats');
+    return 'admin.html';
+  } catch (_) {
+    return 'index.html';
+  }
+}
+
+const currentUser = Parse.User.current();
+if (currentUser) {
+  resolvePostLoginRoute(currentUser).then((route) => { window.location.href = route; });
+}
+
+if (!currentUser && window.location.hash === '#register') {
+  setTimeout(() => switchTab('register'), 0);
+}
+
+if (!currentUser && window.location.hash === '#reset') {
+  setTimeout(() => switchTab('reset'), 0);
+}
+
+function switchTab(tab){
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&tab==='login')||(i===1&&tab==='register')));
+  document.getElementById('loginForm').classList.toggle('active',tab==='login');
+  document.getElementById('registerForm').classList.toggle('active',tab==='register');
+  document.getElementById('resetForm').classList.toggle('active',tab==='reset');
+  clearAlerts();
+}
+function clearAlerts(){['loginAlert','registerAlert','resetAlert'].forEach(id=>{const e=document.getElementById(id);e.className='alert';e.textContent='';});}
+function showAlert(id,msg,type){const e=document.getElementById(id);e.className=`alert ${type}`;e.textContent=msg;}
+function togglePass(id,btn){const i=document.getElementById(id);const p=i.type==='password';i.type=p?'text':'password';btn.innerHTML=`<i class="fas fa-${p?'eye-slash':'eye'}"></i>`;}
+
+async function doLogin(e){
+  e.preventDefault();clearAlerts();
+  const email=document.getElementById('loginEmail').value.trim();
+  const pass=document.getElementById('loginPass').value;
+  const btn=document.getElementById('loginBtn');
+  btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Signing in...';
+  try{
+    const user = await Parse.User.logIn(email,pass);
+    const route = await resolvePostLoginRoute(user);
+    showAlert('loginAlert','Login successful. Redirecting...','success');
+    setTimeout(()=>window.location.href=route,900);
+  }catch(err){
+    let m=err.message||'Login failed'; if(err.code===101) m='Invalid email or password.';
+    showAlert('loginAlert',m,'error'); btn.disabled=false; btn.innerHTML='<i class="fas fa-sign-in-alt"></i> Sign In';
+  }
+}
+
+async function doRegister(e){
+  e.preventDefault();clearAlerts();
+  const firstName=document.getElementById('regFirstName').value.trim();
+  const lastName=document.getElementById('regLastName').value.trim();
+  const email=document.getElementById('regEmail').value.trim();
+  const phone=document.getElementById('regPhone').value.trim();
+  const pass=document.getElementById('regPass').value;
+  const confirm=document.getElementById('regConfirm').value;
+  if(pass!==confirm){showAlert('registerAlert','Passwords do not match.','error');return;}
+  const btn=document.getElementById('registerBtn');
+  btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Creating account...';
+  try{
+    const user=new Parse.User();
+    user.set('username',email);user.set('email',email);user.set('password',pass);
+    user.set('firstName',firstName);user.set('lastName',lastName);user.set('phone',phone);user.set('isAdmin',false);
+    await user.signUp();
+    showAlert('registerAlert','Account created successfully. Redirecting...','success');
+    setTimeout(()=>window.location.href='index.html',1000);
+  }catch(err){
+    let m=err.message||'Registration failed'; if(err.code===202) m='This email already exists.';
+    showAlert('registerAlert',m,'error'); btn.disabled=false; btn.innerHTML='<i class="fas fa-user-plus"></i> Create Account';
+  }
+}
+
+async function doResetPassword(e){
+  e.preventDefault();
+  clearAlerts();
+  const email=document.getElementById('resetEmail').value.trim();
+  const btn=document.getElementById('resetBtn');
+  btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending...';
+  try{
+    await Parse.User.requestPasswordReset(email);
+    showAlert('resetAlert','Password reset email sent. Check your inbox (and spam folder).','success');
+  }catch(err){
+    const m=err?.message||'Unable to send reset email right now.';
+    showAlert('resetAlert',m,'error');
+  }finally{
+    btn.disabled=false;btn.innerHTML='<i class="fas fa-paper-plane"></i> Send Reset Link';
+  }
+}
+</script>
+</body>
+</html>
